@@ -9,6 +9,7 @@
 #include "/home/codeleaded/System/Static/Library/MMenuSystem.h"
 
 MenuSystem menu;
+MenuOption* preselected;
 MenuOption* selected;
 
 void Setup(AlxWindow* w){
@@ -55,6 +56,7 @@ void Setup(AlxWindow* w){
 
 	MenuSystem_Step(&menu);
 
+	preselected = NULL;
 	selected = NULL;
 }
 void Update(AlxWindow* w){
@@ -64,15 +66,13 @@ void Update(AlxWindow* w){
     }
 
 	if(menu.trace.size > 0){
-		if(Stroke(ALX_KEY_ENTER).PRESSED){
-			//selected = MenuSystem_Select(&menu);
-		}
 		if(Stroke(ALX_KEY_SPACE).PRESSED){
 			MenuSystem_Deactivate(&menu,&menu.trace);
 		}
 
 		if(Stroke(ALX_MOUSE_L).PRESSED){
 			MMenuSystem_SelectPoint(&menu,GetMouse());
+			preselected = selected;
 			selected = MenuSystem_Select(&menu);
 		}
 	}
@@ -83,7 +83,7 @@ void Update(AlxWindow* w){
 
 	MMenuSystem_Render(WINDOW_STD_ARGS,&menu);
 
-	if(selected && selected->text)
+	if(selected && preselected == selected && selected->text)
 		RenderCStr(selected->text,0.0f,0.0f,RED);
 }
 void Delete(AlxWindow* w){
