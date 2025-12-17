@@ -13,13 +13,13 @@ MenuOption* selected;
 
 void Setup(AlxWindow* w){
 	menu = MenuSystem_New(
-		AlxFont_MAKE_HIGH(16,32),
+		AlxFont_MAKE_HIGH(32,64),
 		"./assets/Pointer.png",
 		"./assets/Fold.png",
 		"./assets/FoldUp.png",
 		"./assets/FoldDown.png",
 		"./assets/Rainbow_Atlas.png",
-		0U,32,0.0f,0.0f,0.0f
+		0U,64,0.0f,32.0f,32.0f
 	);
 
 	MenuSystem_Set(&menu,0,(int[]){   },	MenuOption_Make(0,"root",			"/",NULL,NULL,3,10));
@@ -84,7 +84,7 @@ void Update(AlxWindow* w){
 	MMenuSystem_Render(WINDOW_STD_ARGS,&menu);
 
 	if(selected && selected->text)
-		RenderCStr(selected->text,0.0f,0.0f,BLUE);
+		RenderCStr(selected->text,0.0f,0.0f,RED);
 }
 void Delete(AlxWindow* w){
     MenuSystem_Free(&menu);
