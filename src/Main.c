@@ -69,11 +69,9 @@ void Update(AlxWindow* w){
 		if(Stroke(ALX_KEY_SPACE).PRESSED){
 			MenuSystem_Deactivate(&menu,&menu.trace);
 		}
-
 		if(Stroke(ALX_MOUSE_L).PRESSED){
-			MMenuSystem_SelectPoint(&menu,GetMouse());
 			preselected = selected;
-			selected = MenuSystem_Select(&menu);
+			selected = MMenuSystem_SelectPoint(&menu,GetMouse());
 		}
 	}
 
